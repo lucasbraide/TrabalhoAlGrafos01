@@ -1,5 +1,8 @@
 Disciplina: CK0111 - Algoritmos em Grafos
-Prazo de Entrega: 12/04/2023 23:59:59 Aberto
+
+
+Prazo de Entrega: 12/04/2023 23:59:59 
+
 Trabalho 1 - Componentes Conexas
 Escreva um programa que receba um grafo não-direcionado e que escreva as suas componentes conexas. Uma componente conexa é um conjunto maximal de vértices ligados por caminhos no grafo. Assim, por exemplo, se a entrada for (no formato explicado adiante) o grafo
 
