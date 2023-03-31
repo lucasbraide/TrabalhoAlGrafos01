@@ -2,15 +2,6 @@
 with open('teste.txt') as f:
     entrada = f.readlines()
 
-'''class Vertice:
-    vizinhos = None
-    grau = None
-
-    def __init__(self, vizinhos):
-        self.vizinhos = vizinhos
-        self.grau = 0
-        for i in len(vizinhos):
-            self.grau += 1'''
 class Grafo:
     nver = None
     arestas = None
@@ -18,19 +9,39 @@ class Grafo:
         self.nver = nver
         self.arestas = arestas
     
-    def printar_grafo(self):
+    def org_print_grafo(self):
+        componentes = []
+        lista_check = []
+        for i in range(1, self.nver + 1):
+            if i not in lista_check:
+                if len(vizinhanca(i, self.arestas)) != 0:
+                    componentes.append(vizinhanca(i, self.arestas))
+                else:
+                    componentes.append([i])
+                for aux in vizinhanca(i,self.arestas):
+                    lista_check.append(aux)
+        return componentes
+            
+    def print_componentes(self, componentes):
+        for i in range (len(componentes)):
+            for aux in componentes[i]:
+                string_aux = " "
+                strig_aux = string
+                print(string_aux)
+                
+                    
 
         
                             
 
 def calcular_dist(grafo, vertice):
-    d = [None for i in range(grafo.nver())]
+    d = [None for i in range(0, grafo.nver)]
     d[vertice] = 0
-    fila = []
+    f = []
     f.append(vertice)
     while len(f) > 0:
         aux = f.pop()
-        for v in vizinhanca(aux):
+        for v in vizinhanca(aux, grafo.arestas):
             if d[v] == None:
                 d[v] = d[aux] + 1
                 f.append(v)
@@ -59,11 +70,17 @@ def monta_arestas(entrada, nver):
 
 def vizinhanca(v, arestas):
     viz = []
-    for i in arestas:
-        if v in i:
-            for aux in i:
-                if aux != v:
-                    viz.append(aux)
+    fila = []
+    fila.append(v)
+    while len(fila) != 0:
+        u = fila.pop()
+        for edge in arestas:
+            if u in edge:
+                for aux in edge:
+                    if aux != u and aux not in viz:
+                        fila.append(aux)
+                        viz.append(aux) 
+    viz.sort()
     return viz
 
 
@@ -71,6 +88,12 @@ n = conta_vertices(entrada)
 arestas = monta_arestas(entrada, n)
 
 grafo = Grafo(n, arestas)
+print(grafo.arestas)
+
+componentes = grafo.org_print_grafo()
+grafo.print_componentes(componentes)
+
+
 
 
 
