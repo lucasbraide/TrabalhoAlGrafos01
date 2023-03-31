@@ -1,7 +1,7 @@
 import sys
 '''with open('teste.txt') as f:
-    entrada = f.readlines()'''
-
+    entrada = f.readlines()
+'''
 entrada = sys.stdin.readlines()
 
 class Grafo:
@@ -13,15 +13,16 @@ class Grafo:
     
     def org_print_grafo(self):
         componentes = []
-        lista_check = []
-        for i in range(1, self.nver + 1):
-            if i not in lista_check:
-                if len(vizinhanca(i, self.arestas)) != 0:
-                    componentes.append(vizinhanca(i, self.arestas))
+        lista_check = [False for i in range (self.nver)]
+        for i in range(0, self.nver):
+            if lista_check[i] == False:
+                viz = vizinhanca(i + 1, self.arestas)
+                if len(viz) != 0:
+                    componentes.append(viz)
                 else:
-                    componentes.append([i])
-                for aux in vizinhanca(i,self.arestas):
-                    lista_check.append(aux)
+                    componentes.append([i + 1])
+                for aux in viz:
+                    lista_check[aux - 1] = True
         return componentes
             
     def print_componentes(self, componentes):
