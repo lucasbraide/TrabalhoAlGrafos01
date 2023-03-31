@@ -1,6 +1,8 @@
+import sys
+'''with open('teste.txt') as f:
+    entrada = f.readlines()'''
 
-with open('teste.txt') as f:
-    entrada = f.readlines()
+entrada = sys.stdin.readlines()
 
 class Grafo:
     nver = None
@@ -24,11 +26,7 @@ class Grafo:
             
     def print_componentes(self, componentes):
         for i in range (len(componentes)):
-            for aux in componentes[i]:
-                string_aux = " "
-                strig_aux = string
-                print(string_aux)
-                
+            print(" ".join([str(x) for x in componentes[i]]))
                     
 
         
@@ -86,10 +84,7 @@ def vizinhanca(v, arestas):
 
 n = conta_vertices(entrada)
 arestas = monta_arestas(entrada, n)
-
 grafo = Grafo(n, arestas)
-print(grafo.arestas)
-
 componentes = grafo.org_print_grafo()
 grafo.print_componentes(componentes)
 
