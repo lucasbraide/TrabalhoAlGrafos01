@@ -1,8 +1,6 @@
 import sys
-'''with open('teste.txt') as f:
+with open('teste.txt') as f:
     entrada = f.readlines()
-'''
-entrada = sys.stdin.readlines()
 
 class Grafo:
     nver = None
@@ -14,7 +12,7 @@ class Grafo:
     def org_print_grafo(self):
         componentes = []
         lista_check = [False for i in range (self.nver)]
-        for i in range(0, self.nver):
+        for i in range (self.nver):
             if lista_check[i] == False:
                 viz = vizinhanca(i + 1, self.arestas)
                 if len(viz) != 0:
@@ -31,23 +29,6 @@ class Grafo:
                     
 
         
-                            
-
-def calcular_dist(grafo, vertice):
-    d = [None for i in range(0, grafo.nver)]
-    d[vertice] = 0
-    f = []
-    f.append(vertice)
-    while len(f) > 0:
-        aux = f.pop()
-        for v in vizinhanca(aux, grafo.arestas):
-            if d[v] == None:
-                d[v] = d[aux] + 1
-                f.append(v)
-
-    return d
-
-
 def conta_vertices(entrada):
     n = 0
     for i, line in enumerate(entrada):
@@ -67,20 +48,23 @@ def monta_arestas(entrada, nver):
 
     return arestas
 
-def vizinhanca(v, arestas):
+def vizinhanca(v, arestas, lista_check):
     viz = []
     fila = []
-    fila.append(v)
-    while len(fila) != 0:
-        u = fila.pop()
-        for edge in arestas:
-            if u in edge:
-                for aux in edge:
-                    if aux != u and aux not in viz:
-                        fila.append(aux)
-                        viz.append(aux) 
-    viz.sort()
-    return viz
+    if v not in lista_check:
+        fila.append(v)
+        while len(fila) != 0:
+            u = fila.pop()
+            for edge in arestas:
+                if u in edge:
+                    for aux in edge:
+                        if aux != u and aux not in viz:
+                            fila.append(aux)
+                            viz.append(aux) 
+        viz.sort()
+        return viz
+    else:
+        return
 
 
 n = conta_vertices(entrada)
