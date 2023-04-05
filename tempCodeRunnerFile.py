@@ -1,1 +1,0 @@
-entrada = sys.stdin.readlines()
